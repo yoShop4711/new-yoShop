@@ -1,0 +1,76 @@
+import Header from "./components/header/Header"
+import Login from "./components/auth/Login"
+import Register from "./components/auth/Register"
+import Forgot from "./components/auth/Forgot"
+import Products from "./components/products/Products"
+import Reset from "./components/auth/Reset"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+// import { DataProvider } from "./GlobalState"
+import User from "./components/admin/User"
+import ShowUsers from "./components/admin/ShowUsers"
+import ShowSellers from "./components/admin/ShowSellers"
+import DeleteUser from "./components/admin/DeleteUser"
+import FilterUsers from "./components/admin/FilterUsers"
+import UserStatus from "./components/admin/UserStatus"
+import CreateProduct from "./components/seller/CreateProduct"
+import CreateCategory from "./components/admin/CreateCategory"
+import DetailProduct from "./components/products/DetailProduct"
+import SellerProducts from "./components/seller/SellerProducts"
+import EditProduct from "./components/seller/EditProduct"
+import DeleteProduct from "./components/seller/DeleteProduct"
+import Cart from "./components/buy/Cart"
+import MyOrders from "./components/buyer/MyOrders"
+import ShowOrders from "./components/admin/ShowOrders"
+
+function App() {
+          
+
+  return(
+    
+    
+  
+    <Router>
+    <div className='container'>
+  <Header />
+  <Routes>
+
+<Route path="/" element={ <Products /> } />
+
+    <Route path="/login" element={<Login />
+} />
+  
+  <Route path="/register" element={<Register />} />
+  
+  <Route path="/forgot" element={<Forgot />} />
+  
+  <Route path="/reset" element={<Reset />
+} />
+
+<Route path="/user/:id" element={<User />} />
+<Route path="/show_users" element={<ShowUsers />} />
+<Route path="/show_sellers" element={<ShowSellers />} />
+<Route path="/delete_user/:id" element={<DeleteUser />} />
+<Route path="/user_status/:id" element={<UserStatus />} />
+<Route path="/filter_users" element={<FilterUsers />} />
+<Route path="/create_product" element={< CreateProduct />} />
+<Route path="/create_category" element={ < CreateCategory /> } />
+<Route path="/detail/:id" element={ < DetailProduct /> } />
+<Route path="/my_products" element={ <SellerProducts /> } />
+<Route path="/edit_product/:id" element={<EditProduct />} />
+<Route path="/delete_product/:id" element={<DeleteProduct />}  />
+<Route path="/cart" element={<Cart />} />
+<Route path="/my_orders" element={<MyOrders  />} />
+<Route path="/show_orders" element={<ShowOrders/>} />
+
+
+  
+  </Routes>
+  
+  </div>
+  
+  </Router>
+
+  )
+}
+
+export default App
