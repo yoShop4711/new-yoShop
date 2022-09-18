@@ -15,7 +15,7 @@ function Products() {
 
 
 
-    // console.log(ProductsApi);
+    
 
     if(loading) return <div><Loading /></div>
     return(

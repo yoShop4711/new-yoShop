@@ -1,15 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import {addItem} from "../../api/CartApi"
+import {addItem,  itemTotal} from "../../api/CartApi"
 
 
 function BtnRender({product}) {
     const navigate = useNavigate()
     const [redirect, setRedirect] = useState(false);
-
-
-   
-   
 
     const addToCart = () => {
         addItem(product, () => {

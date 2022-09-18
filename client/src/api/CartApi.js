@@ -49,6 +49,7 @@ export const updateItem = (productId, count) => {
             if (product._id === productId) {
                 cart[i].count = count;
             }
+            return cart
         });
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -62,25 +63,20 @@ export const removeItem = productId => {
             cart = JSON.parse(localStorage.getItem("cart"));
         }
 
-    //     cart.map((product, i) => {
-    //         if (product._id === productId) {
-    //             cart.splice(i, 1);
-    //         }
-    // });
-
-    cart.forEach((product, i) => {
-
-         if (product._id === productId) {
+        cart.map((product, i) => {
+            if (product._id === productId) {
                 cart.splice(i, 1);
             }
+            return cart;
+    });
 
-    })
+    
 
         localStorage.setItem("cart", JSON.stringify(cart));
-        alert("item removed")
+        
         
     }
-    return cart;
+    
 };
 
 export const emptyCart = next => {

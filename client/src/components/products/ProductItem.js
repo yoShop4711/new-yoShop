@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from "react"
 import { GlobalState } from "../../GlobalState"
 import BtnRender from "./BtnRender"
-import DetailProduct from "./DetailProduct"
+
 
 
 function ProductItem({product}) {
 const state = useContext(GlobalState)
-const[users, setUsers] = state.UsersApi.users
+const[users] = state.UsersApi.users
 const[single, setSingle] = useState([])
 
 

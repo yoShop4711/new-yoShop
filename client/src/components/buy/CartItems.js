@@ -1,33 +1,34 @@
 import moment from "moment";
 import "./cart.css";
-import { addItem, updateItem, removeItem } from "../../api/CartApi";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {  updateItem, removeItem } from "../../api/CartApi";
+
+import { useEffect, useState } from "react";
 
 function CartItems({
   product,
-  showAddToCartButton = true,
-  cartUpdate = true,
+  cartUpdate = false,
   showRemoveProductButton = false,
+  setRun = (f) => f, 
+  run = undefined, 
+  
+
+  
 }) {
-  const [redirect, setRedirect] = useState(false);
+  
   const [count, setCount] = useState(product.count);
   
 
-  const navigate = useNavigate();
-  
-  const shouldRedirect = (redirect) => {
-    if (redirect) {
-      return navigate("/cart");
-    }
-  };
 
+  
+  
   
   const showRemoveButton = (showRemoveProductButton) => {
     return (
       showRemoveProductButton && (
         <button
-          onClick={() => removeItem(product._id)}
+          onClick={() =>{ removeItem(product._id);
+            setRun(!run);
+           } }
           className="badge-pill badge-danger mt-2 mb-2 p-2 px-3"
         >
           Remove Product
@@ -36,7 +37,13 @@ function CartItems({
     );
   };
 
+  useEffect(() => {
+
+
+  }, [])
+
   const handleChange = (productId) => (event) => {
+    setRun(!run);
     setCount(event.target.value < 1 ? 1 : event.target.value);
     if (event.target.value >= 1) {
       updateItem(productId, event.target.value);
@@ -74,7 +81,7 @@ function CartItems({
 
   return (
     <div className="card">
-      {shouldRedirect(redirect)}
+      {/* {shouldRedirect(redirect)} */}
 
       <div className="card-body">
         <img
