@@ -13,11 +13,13 @@ function ShowOrders() {
     useEffect(() => {
         const showOrders = async() => {
 
-            const res = await axios("/cart/show_carts", {
+            const res = await axios.get("/cart/show_carts", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
+
+        
 
             setItems(res.data.result);
             
@@ -33,13 +35,13 @@ function ShowOrders() {
 
     return(<>
 
-    {
+{
         items.map(item => {
             return(
-                item.cartItems.map((order, index) => {
+                item.products.map((order, index) => {
 
                     return(
-                        <AllOrders key={index} order={order} />
+                        <AllOrders key={index} order={order} user={item.user}  />
                     )
 
 
@@ -47,7 +49,7 @@ function ShowOrders() {
             )
         })
     }
-    
+
     
     </>)
 }

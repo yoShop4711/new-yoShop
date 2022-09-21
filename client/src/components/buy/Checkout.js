@@ -13,25 +13,25 @@ function Checkout({products}) {
 };
 
 
-
+const amount =  getTotal(products)
 
 
 const createOrder = async () => {
 
-  const res = await axios.post("/cart/create_order", {products}, {
+  const res = await axios.post("/cart/create_order", {products, amount}, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
 
-  console.log(res);
+  alert(res.data.msg)
 
 
 }
 
   return(
     <div>
-            <h2>Total: ${getTotal()}</h2>
+            <h2>Total: MK{getTotal()}</h2>
             <button onClick={createOrder}>create order</button>
           
         </div>

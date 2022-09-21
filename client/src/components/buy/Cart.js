@@ -40,9 +40,11 @@ function Cart() {
   };
 
   const noItemsMessage = () => (
+    <div>
     <h2>
         Your cart is empty. <br /> <Link to="/">Continue shopping</Link>
     </h2>
+    </div>
 );
 
     

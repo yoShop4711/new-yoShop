@@ -12,20 +12,20 @@ OrderRoute.post(
 
     // req.body.order = req.user.id 
 
-    const {products} = req.body
-
+    const {products, amount} = req.body
     const order = new Order({
       products,
-  
+      amount,
       user: req.user.id
     });
-    order.save((error, data) => {
+   await order.save((error, data) => {
         if (error) {
             return res.status(400).json({
                 error: errorHandler(error)
             });
+        
         } 
-        res.json(data);
+        
 
       
       }
@@ -33,7 +33,7 @@ OrderRoute.post(
 
         )
     
-
+        res.json({msg: "order succesfully created"});
 
 
 
@@ -41,28 +41,28 @@ OrderRoute.post(
   })
 );
 
-// OrderRoute.get(
-//   "/cart/show_carts",
-//   verify,
-//   authAdmin,
-//   asyncHandler(async (req, res) => {
-//     const result = await Cart.find();
+OrderRoute.get(
+  "/cart/show_carts",
+  verify,
+  authAdmin,
+  asyncHandler(async (req, res) => {
+    const result = await Order.find();
 
-//     res.json({ result });
-//   })
-// );
+    res.json({ result });
+  })
+);
 
-// OrderRoute.get(
-//   "/cart/show_user_carts",
-//   verify,
-//   asyncHandler(async (req, res) => {
+OrderRoute.get(
+  "/cart/show_user_carts",
+  verify,
+  asyncHandler(async (req, res) => {
 
-// await Cart.find({user: req.user.id}).then(carts => res.json({carts}))
-
-
+await Order.find({user: req.user.id}).then(orders => res.json({orders}))
 
 
-//   })
-// );
+
+
+  })
+);
 
 module.exports = OrderRoute;

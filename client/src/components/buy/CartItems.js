@@ -91,16 +91,20 @@ function CartItems({
           alt={product.productName}
         />
 
-        <div className="card-header name">{product.productName}</div>
+        <div className="card-header name">
+          
+        <h3>  {product.productName} </h3>
+          
+          </div>
 
         <p className="lead">{product.productDescription.substring(0, 100)}</p>
 
-        <p className="row ml-3">
+        <div className="row ml-3">
           <p style={{ fontSize: "1rem" }} className="row">
             MK
             <div style={{ fontSize: "2rem" }}>{product.productPrice}</div>
           </p>
-        </p>
+        </div>
 
         <p className="black-8">
           Added on {moment(product.createdAt).fromNow()}
