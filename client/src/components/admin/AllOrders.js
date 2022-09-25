@@ -1,54 +1,54 @@
-import { useEffect, useState, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
 
 
-function AllOrders({order, user}) {
 
-    const state = useContext(GlobalState)
+function Orders({order}) {
+
+   
+
+   const state = useContext(GlobalState)
    const[products] = state.ProductsApi.products
    const[singleOrders, setSingleOrders] = useState([])
-   const [dropdown, setDropdown] = useState(false);
 
 
-// console.log(order._id);
 
    useEffect(() => {
 
-    if(order._id) {
+    if(order.product) {
 
 products.forEach(product => {
-    if(product._id === order._id) setSingleOrders(product)
+    if(product._id === order.product) setSingleOrders(product)
 })
 
     }
 
-   }, [order._id, products])
+   }, [order.product, products])
 
+
+   if(singleOrders.length === 0) return null;
+
+
+  
+       const picture = singleOrders.productImage.data.data
 
    
 
-//    const picture = singleOrders.productImage.data.data
-
-   
-
-//    const base64String =  window.btoa(
-//     new Uint8Array(picture)
-//       .reduce((data, byte) => data + String.fromCharCode(byte), '')
-//   );
-
-  if(singleOrders.length === 0) 
-  return <h2 style={{textAlign: "center", fontSize: "5rem"}}>No orders</h2> 
-
-
+   const base64String =  window.btoa(
+    new Uint8Array(picture)
+      .reduce((data, byte) => data + String.fromCharCode(byte), '')
+  );
 
 
     
+
     return(<>
+
+<h1>{singleOrders.productDescription}</h1>
+
+
     
-    
-    
-    </>
-          )
+    </>)
 }
 
-export default AllOrders
+export default Orders

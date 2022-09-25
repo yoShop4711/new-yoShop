@@ -1,7 +1,7 @@
 import axios from "axios"
 import {  useEffect, useState, useContext } from "react"
 import { GlobalState } from "../../GlobalState"
-import Orders from "./Orders"
+import AllOrders from "./AllOrders"
 
 
 function MyOrders() {
@@ -48,7 +48,7 @@ function MyOrders() {
 
                         return(
 
-                            <Orders key={index} order={order} />
+                            <AllOrders key={index} order={order} />
                             
                         )
 

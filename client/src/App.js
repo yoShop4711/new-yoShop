@@ -19,8 +19,10 @@ import SellerProducts from "./components/seller/SellerProducts"
 import EditProduct from "./components/seller/EditProduct"
 import DeleteProduct from "./components/seller/DeleteProduct"
 import Cart from "./components/buy/Cart"
-import MyOrders from "./components/buyer/MyOrders"
-import ShowOrders from "./components/admin/ShowOrders"
+// import MyOrders from "./components/admin/MyOrders"
+import Orders from "./components/admin/Orders"
+import Delivered from "./components/admin/Delivered"
+
 
 function App() {
           
@@ -59,8 +61,9 @@ function App() {
 <Route path="/edit_product/:id" element={<EditProduct />} />
 <Route path="/delete_product/:id" element={<DeleteProduct />}  />
 <Route path="/cart" element={<Cart />} />
-<Route path="/my_orders" element={<MyOrders  />} />
-<Route path="/show_orders" element={<ShowOrders/>} />
+{/* <Route path="/my_orders" element={<MyOrders  />} /> */}
+<Route path="/orders" element={<Orders/>} />
+<Route path="/delivered" element={<Delivered />} />
 
 
   

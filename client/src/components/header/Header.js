@@ -32,6 +32,7 @@ function Header() {
     });
 
     localStorage.removeItem("firstLogin");
+    localStorage.removeItem("cart")
 
     window.location.href = "/";
   };
@@ -80,7 +81,7 @@ function Header() {
           <Link to="/create_category">Create Category</Link>
         </li>
         <li>
-          <Link to="/show_orders">Show Orders</Link>
+          <Link to="/orders">Orders Cats</Link>
         </li>
       </>
     );
