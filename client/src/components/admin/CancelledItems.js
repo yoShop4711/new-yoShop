@@ -2,7 +2,8 @@ import moment from "moment"
 import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
 
-function DeliverTable({item, amount, status, user, updated}) {
+
+function CancelledItems({item, user, amount, status, updated}) {
 
     const state = useContext(GlobalState)
     
@@ -57,10 +58,12 @@ function DeliverTable({item, amount, status, user, updated}) {
       
       if(buyer.length === 0) return null;
 
-    
+   
 
-    
-    return(<div className="container">
+
+
+    return(
+<div className="container">
         <div className="row row-cols-3">
 <div className="col">
 
@@ -88,7 +91,10 @@ function DeliverTable({item, amount, status, user, updated}) {
     
     
     
-    </div>)
+    </div>
+
+
+    )
 }
 
-export default DeliverTable
+export default CancelledItems

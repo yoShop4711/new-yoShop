@@ -14,13 +14,13 @@ function MyOrders() {
 
     const getOrders = async() => {
 
-        const res = await axios.get("/cart/show_user_carts", {
+        const res = await axios.get("/cart/show_carts", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
 
-        setItems(res.data.carts);
+        setItems(res.data.result);
 
 
 
@@ -32,23 +32,27 @@ function MyOrders() {
 
   }, [token])
 
-//   console.log(items);
+  
 
 
 
     return(<>
 
 
-    {
+     {
         items.map(item => {
             return(
 
                 
-                    item.cartItems.map((order, index) => {
+                    item.products.map((order, index) => {
 
                         return(
 
-                            <AllOrders key={index} order={order} />
+                            <AllOrders key={index} order={order} 
+                            amount={item.amount}
+                            status={item.status}
+                            user={item.user}
+                            updated={item.updatedAt} />
                             
                         )
 
@@ -59,8 +63,7 @@ function MyOrders() {
             )
         })
     }
-    
-    
+     
     
     
     </>)

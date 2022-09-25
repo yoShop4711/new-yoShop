@@ -5,7 +5,6 @@ import Forgot from "./components/auth/Forgot"
 import Products from "./components/products/Products"
 import Reset from "./components/auth/Reset"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-// import { DataProvider } from "./GlobalState"
 import User from "./components/admin/User"
 import ShowUsers from "./components/admin/ShowUsers"
 import ShowSellers from "./components/admin/ShowSellers"
@@ -19,9 +18,12 @@ import SellerProducts from "./components/seller/SellerProducts"
 import EditProduct from "./components/seller/EditProduct"
 import DeleteProduct from "./components/seller/DeleteProduct"
 import Cart from "./components/buy/Cart"
-// import MyOrders from "./components/admin/MyOrders"
 import Orders from "./components/admin/Orders"
 import Delivered from "./components/admin/Delivered"
+import Cancelled from "./components/admin/Cancelled"
+import Processing from "./components/admin/Processing"
+import NotProcessed from "./components/admin/NotProcessed"
+import MyOrders from "./components/admin/MyOrders"
 
 
 function App() {
@@ -61,9 +63,12 @@ function App() {
 <Route path="/edit_product/:id" element={<EditProduct />} />
 <Route path="/delete_product/:id" element={<DeleteProduct />}  />
 <Route path="/cart" element={<Cart />} />
-{/* <Route path="/my_orders" element={<MyOrders  />} /> */}
 <Route path="/orders" element={<Orders/>} />
 <Route path="/delivered" element={<Delivered />} />
+<Route path="/cancelled" element={<Cancelled />} />
+<Route path="/processing" element={<Processing />} />
+<Route path="/not_processed" element={<NotProcessed />} />
+<Route path="/all_orders" element={<MyOrders />} />
 
 
   
