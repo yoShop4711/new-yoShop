@@ -10,6 +10,7 @@ function DeliverTable({item, amount, status, user, updated}) {
     const[users] = state.UsersApi.users
     const[prods, setProds] = useState([])
     const[buyer, setBuyer] = useState([])
+    const[merchant, setMerchant] = useState([])
 
     useEffect(() => {
 
@@ -41,6 +42,17 @@ function DeliverTable({item, amount, status, user, updated}) {
 
     }, [user, users])
 
+    useEffect(() => {
+
+      if(prods.createdBy) {
+        users.forEach(use => {
+          if(use._id === prods.createdBy) setMerchant(use)
+        })
+      }
+  
+    }, [prods.createdBy, users])
+  
+
 
     if(prods.length === 0) return null;
 
@@ -57,7 +69,9 @@ function DeliverTable({item, amount, status, user, updated}) {
       
       if(buyer.length === 0) return null;
 
-    
+      if(prods.length === 0) 
+      return <h2 style={{textAlign: "center", fontSize: "5rem"}}>No Orders</h2> 
+
 
     
     return(<div className="container">
@@ -67,6 +81,7 @@ function DeliverTable({item, amount, status, user, updated}) {
 <div className="card">
     <img className="card-img-top" src={`data:image/jpg;base64, ${base64String}`} alt={prods.productName} />
     <div className="card-body">
+    <h2 className="card-title text-danger">Seller's name: <em> {merchant.fullname} </em></h2>
       <h2 className="card-title">Buyer's name: <em> {buyer.fullname} </em></h2>
       <h2>Product's name: <em> {prods.productName} </em> </h2>
       <h5 className="card-title">product price: <em>MK{amount}</em></h5>

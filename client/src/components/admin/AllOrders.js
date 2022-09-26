@@ -5,7 +5,7 @@ import moment from "moment"
 
 
 function Orders({order, amount, status, user, updated}) {
-
+  
 
 
    const state = useContext(GlobalState)
@@ -13,6 +13,7 @@ function Orders({order, amount, status, user, updated}) {
    const[users] = state.UsersApi.users
    const[singleOrders, setSingleOrders] = useState([])
    const[buyer, setBuyer] = useState([])
+   const[merchant, setMerchant] = useState([])
 
 
 
@@ -39,6 +40,19 @@ products.forEach(product => {
 
   }, [user, users])
 
+  useEffect(() => {
+
+    if(singleOrders.createdBy) {
+      users.forEach(use => {
+        if(use._id === singleOrders.createdBy) setMerchant(use)
+      })
+    }
+
+  }, [singleOrders.createdBy, users])
+
+
+
+
 
   if(singleOrders.length === 0) return null
 
@@ -53,19 +67,24 @@ products.forEach(product => {
   );
 
 
-  
+
 
 
   if(buyer.length === 0) return null;
 
+  if(singleOrders.length === 0) 
+      return <h2 style={{textAlign: "center", fontSize: "5rem"}}>No Orders</h2> 
 
-    return(<div className="container">
-    <div className="row row-cols-3">
-<div className="col">
 
-<div className="card">
+
+    return(<div className="container-fluid">
+    <div className="row">
+<div className=" col-lg-4">
+
+<div className="card" style={{padding: "7px", margin: "7px"}}>
 <img className="card-img-top" src={`data:image/jpg;base64, ${base64String}`} alt={singleOrders.productName} />
 <div className="card-body">
+<h2 className="card-title text-danger">Seller's name: <em> {merchant.fullname} </em></h2>
   <h2 className="card-title">Buyer's name: <em> {buyer.fullname} </em></h2>
   <h2>Product's name: <em> {singleOrders.productName} </em> </h2>
   <h5 className="card-title">product price: <em>MK{amount}</em></h5>
