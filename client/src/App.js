@@ -25,6 +25,12 @@ import Processing from "./components/admin/Processing"
 import NotProcessed from "./components/admin/NotProcessed"
 import MyOrders from "./components/admin/MyOrders"
 import BuyerOrders from "./components/buyer/BuyerOrders"
+import AllMyOrders from "./components/buyer/AllMyOrders"
+import NotProcessedOrders from "./components/buyer/NotProcessedOrders"
+import ProcessingOrders from "./components/buyer/ProcessingOrders"
+import DeliveredOrders from "./components/buyer/DeliveredOrders"
+import CancelledOrders from "./components/buyer/CancelledOrders"
+import CancelCarts from "./components/buyer/CancelCarts"
 
 
 function App() {
@@ -71,7 +77,12 @@ function App() {
 <Route path="/not_processed" element={<NotProcessed />} />
 <Route path="/all_orders" element={<MyOrders />} />
 <Route path="/buyer_orders" element={<BuyerOrders />} />
-
+<Route path="/show_all_my_orders" element={<AllMyOrders />}  />
+<Route path="/show_not_processed_carts" element={<NotProcessedOrders />} />
+<Route path="/show_my_processing_carts" element={<ProcessingOrders />} />
+<Route path="/show_my_delivered_carts" element={<DeliveredOrders />} />
+<Route path="/show_my_cancelled_carts" element={<CancelledOrders />} />
+<Route path="/cancel_carts" element={<CancelCarts />} />
 
   
   </Routes>

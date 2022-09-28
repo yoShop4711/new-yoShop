@@ -111,7 +111,7 @@ OrderRoute.get(
   verify,
   asyncHandler(async (req, res) => {
 
-    await Order.find({ user: req.user.id, status: "Processsing" }).then((orders) =>
+    await Order.find({ user: req.user.id, status: "Processing" }).then((orders) =>
     res.json({ orders })
   );
 
