@@ -40,19 +40,14 @@ OrderRoute.get(
   })
 );
 
-
 OrderRoute.get(
   "/cart/show_not_processed",
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
+    const not_processed = await Order.find({ status: "Not processed" });
 
-    const not_processed = await Order.find({status: "Not processed"})
-
-    res.json({not_processed})
-   
-
-
+    res.json({ not_processed });
   })
 );
 
@@ -61,11 +56,9 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
+    const processing = await Order.find({ status: "Processing" });
 
-    const processing = await Order.find({status: "Processing"})
-
-    res.json({processing})
-   
+    res.json({ processing });
   })
 );
 
@@ -74,11 +67,9 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
+    const delivered = await Order.find({ status: "Delivered" });
 
-    const delivered = await Order.find({status: "Delivered"})
-
-    res.json({delivered})
-   
+    res.json({ delivered });
   })
 );
 
@@ -87,14 +78,11 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
+    const cancelled = await Order.find({ status: "Cancelled" });
 
-    const cancelled = await Order.find({status: "Cancelled"})
-
-    res.json({cancelled})
-   
+    res.json({ cancelled });
   })
 );
-
 
 OrderRoute.get(
   "/cart/show_user_carts",
@@ -106,9 +94,54 @@ OrderRoute.get(
   })
 );
 
+OrderRoute.get(
+  "/cart/show_user_not_processed_carts",
+  verify,
+  asyncHandler(async (req, res) => {
+
+    await Order.find({ user: req.user.id, status: "Not processed" }).then((orders) =>
+    res.json({ orders })
+  );
+
+  })
+);
+
+OrderRoute.get(
+  "/cart/show_user_processing_carts",
+  verify,
+  asyncHandler(async (req, res) => {
+
+    await Order.find({ user: req.user.id, status: "Processsing" }).then((orders) =>
+    res.json({ orders })
+  );
+
+  })
+);
 
 
+OrderRoute.get(
+  "/cart/show_user_delivered_carts",
+  verify,
+  asyncHandler(async (req, res) => {
 
+    await Order.find({ user: req.user.id, status: "Delivered" }).then((orders) =>
+    res.json({ orders })
+  );
+
+  })
+);
+
+OrderRoute.get(
+  "/cart/show_user_cancelled_carts",
+  verify,
+  asyncHandler(async (req, res) => {
+
+    await Order.find({ user: req.user.id, status: "Cancelled" }).then((orders) =>
+    res.json({ orders })
+  );
+
+  })
+);
 
 
 

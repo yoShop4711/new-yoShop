@@ -91,7 +91,7 @@ function Header() {
     return (
       <>
         <li>
-          <Link to="/my_orders">my orders</Link>
+          <Link to="/buyer_orders">my orders</Link>
         </li>
       </>
     );

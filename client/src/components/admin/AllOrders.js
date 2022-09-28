@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
 import moment from "moment"
+// import "./orders.css"
 
 
 
@@ -77,36 +78,39 @@ products.forEach(product => {
 
 
 
-    return(<div className="container-fluid">
-    <div className="row">
-<div className=" col-lg-4">
+    return(
+ <div className="container">    
+ <div className="row">
+  <div className="col-md-6 col-lg-4">
 
-<div className="card" style={{padding: "7px", margin: "7px"}}>
-<img className="card-img-top" src={`data:image/jpg;base64, ${base64String}`} alt={singleOrders.productName} />
-<div className="card-body">
-<h2 className="card-title text-danger">Seller's name: <em> {merchant.fullname} </em></h2>
-  <h2 className="card-title">Buyer's name: <em> {buyer.fullname} </em></h2>
+
+
+ <div className="card  " style={{padding: "7px", margin: "7px", width: "18rem"}}>
+ <img className="card-img-top" src={`data:image/jpg;base64, ${base64String}`} alt={singleOrders.productName} />
+ <div className="card-body">
+ <h2 className="card-title text-danger">Seller's name: <em> {merchant.fullname} </em></h2>
+   <h2 className="card-title">Buyer's name: <em> {buyer.fullname} </em></h2>
   <h2>Product's name: <em> {singleOrders.productName} </em> </h2>
   <h5 className="card-title">product price: <em>MK{amount}</em></h5>
   <h5 className="card-title">product status: <em> {status} </em></h5>
-  <h5 className="card-title">number of products: <em>{order.count}</em> </h5>
+   <h5 className="card-title">number of products: <em>{order.count}</em> </h5>
 
-</div>
-<div className="card-footer">
+ </div>
+ <div className="card-footer">
   <small className="text-muted">Last updated {moment(updated).fromNow()}</small>
 </div>
+ </div>
+
+ </div>
+ 
+</div>
 </div>
 
-</div>
 
 
 
-    </div>
+    
 
-
-
-
-</div>
 )
 }
 

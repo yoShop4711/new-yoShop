@@ -24,6 +24,7 @@ import Cancelled from "./components/admin/Cancelled"
 import Processing from "./components/admin/Processing"
 import NotProcessed from "./components/admin/NotProcessed"
 import MyOrders from "./components/admin/MyOrders"
+import BuyerOrders from "./components/buyer/BuyerOrders"
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
 <Route path="/processing" element={<Processing />} />
 <Route path="/not_processed" element={<NotProcessed />} />
 <Route path="/all_orders" element={<MyOrders />} />
+<Route path="/buyer_orders" element={<BuyerOrders />} />
 
 
   
