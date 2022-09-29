@@ -2,6 +2,7 @@ import axios from "axios"
 import {  useEffect, useState, useContext } from "react"
 import { GlobalState } from "../../GlobalState"
 import AllOrders from "./AllOrders"
+import "./products.css"
 
 
 function MyOrders() {
@@ -36,7 +37,7 @@ function MyOrders() {
 
 
 
-    return(<>
+    return(<div className="products">
 
 
      {
@@ -66,7 +67,7 @@ function MyOrders() {
      
     
     
-    </>)
+    </div>)
 
 
 }

@@ -50,7 +50,9 @@ function MyOrders({item, amount, status, updated}) {
   
     
 
-    return(<div className="product_card">
+    return(
+    
+    <div className="product_card">
 
 <img  src={`data:image/jpg;base64, ${base64String}`} alt={prods.productName} />
 
@@ -62,12 +64,6 @@ function MyOrders({item, amount, status, updated}) {
         <h5 >status: <em> {status} </em></h5>
         <h5>number of products: <em>{item.count}</em> </h5>
         <small>Last updated {moment(updated).fromNow()}</small>
-
-
-
-
-
-
 
         </div>
     

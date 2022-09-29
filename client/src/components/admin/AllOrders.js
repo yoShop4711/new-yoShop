@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
 import moment from "moment"
-// import "./orders.css"
+
 
 
 
@@ -78,8 +78,37 @@ products.forEach(product => {
 
 
 
-    return(
- <div className="container">    
+    return(<>
+
+
+<div className="product_card">
+
+<img  src={`data:image/jpg;base64, ${base64String}`} alt={singleOrders.productName} />
+
+
+        <div className="product_box">
+        <h2>Seller: <em> {merchant.fullname} </em></h2>
+       <p>Buyer: <em> {buyer.fullname} </em></p>
+       <p>Product: <em> {singleOrders.productName} </em> </p>
+        <p>Price: <em>MK{amount}</em></p>
+        <p >status: <em> {status} </em></p>
+        <p>number of products: <em>{order.count}</em> </p>
+        <p>Last updated {moment(updated).fromNow()}</p>
+
+
+
+
+
+
+
+        </div>
+    
+    
+    
+    </div>
+
+
+ {/* <div className="container">    
  <div className="row">
   <div className="col-md-6 col-lg-4">
 
@@ -104,12 +133,12 @@ products.forEach(product => {
  </div>
  
 </div>
-</div>
+</div> */}
 
 
 
 
-    
+ </>   
 
 )
 }

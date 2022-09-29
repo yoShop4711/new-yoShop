@@ -4,6 +4,7 @@ const authAdmin = require("../middleware/authAdmin");
 const { Order, CartItem } = require("../models/order");
 const { errorHandler } = require("./errorHandler");
 const asyncHandler = require("express-async-handler");
+const User = require("../models/UserModel");
 
 OrderRoute.post(
   "/cart/create_order",
@@ -98,11 +99,9 @@ OrderRoute.get(
   "/cart/show_user_not_processed_carts",
   verify,
   asyncHandler(async (req, res) => {
-
-    await Order.find({ user: req.user.id, status: "Not processed" }).then((orders) =>
-    res.json({ orders })
-  );
-
+    await Order.find({ user: req.user.id, status: "Not processed" }).then(
+      (orders) => res.json({ orders })
+    );
   })
 );
 
@@ -110,24 +109,19 @@ OrderRoute.get(
   "/cart/show_user_processing_carts",
   verify,
   asyncHandler(async (req, res) => {
-
-    await Order.find({ user: req.user.id, status: "Processing" }).then((orders) =>
-    res.json({ orders })
-  );
-
+    await Order.find({ user: req.user.id, status: "Processing" }).then(
+      (orders) => res.json({ orders })
+    );
   })
 );
-
 
 OrderRoute.get(
   "/cart/show_user_delivered_carts",
   verify,
   asyncHandler(async (req, res) => {
-
-    await Order.find({ user: req.user.id, status: "Delivered" }).then((orders) =>
-    res.json({ orders })
-  );
-
+    await Order.find({ user: req.user.id, status: "Delivered" }).then(
+      (orders) => res.json({ orders })
+    );
   })
 );
 
@@ -135,15 +129,29 @@ OrderRoute.get(
   "/cart/show_user_cancelled_carts",
   verify,
   asyncHandler(async (req, res) => {
-
-    await Order.find({ user: req.user.id, status: "Cancelled" }).then((orders) =>
-    res.json({ orders })
-  );
-
+    await Order.find({ user: req.user.id, status: "Cancelled" }).then(
+      (orders) => res.json({ orders })
+    );
   })
 );
 
+OrderRoute.put(
+  "/cart/update_status/:id",
+  verify,
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
 
+    const order = await Order.findById(id);
+    const buyer = await User.findById(req.user);
 
+    if (order.user.toString() !== buyer._id.toString()) {
+      return res.json({ msg: "Access is denied." });
+    }
+
+    await Order.findByIdAndUpdate(order, req.body, { new: true });
+
+    res.json({ msg: "your order has been successfully updated!" });
+  })
+);
 
 module.exports = OrderRoute;
