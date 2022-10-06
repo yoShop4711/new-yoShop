@@ -32,6 +32,7 @@ import DeliveredOrders from "./components/buyer/DeliveredOrders"
 import CancelledOrders from "./components/buyer/CancelledOrders"
 import CancelCarts from "./components/buyer/CancelCarts"
 import CanncelNotProcessedOrders from "./components/buyer/CancelNotProcessedOrders"
+import ChangeOrderStatus from "./components/buyer/ChangeOrderStatus"
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
 <Route path="/show_my_cancelled_carts" element={<CancelledOrders />} />
 <Route path="/cancel_carts" element={<CancelCarts />} />
 <Route path="/cancel_not_processed_carts" element={<CanncelNotProcessedOrders />} />
+<Route path="/change_order_status/:id" element={<ChangeOrderStatus />} />
 
   
   </Routes>

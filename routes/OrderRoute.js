@@ -6,6 +6,7 @@ const { errorHandler } = require("./errorHandler");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
 
+
 OrderRoute.post(
   "/cart/create_order",
   verify,
@@ -139,19 +140,37 @@ OrderRoute.put(
   "/cart/update_status/:id",
   verify,
   asyncHandler(async (req, res) => {
-    const { id } = req.params;
 
-    const order = await Order.findById(id);
-    const buyer = await User.findById(req.user);
+  
+  
 
-    if (order.user.toString() !== buyer._id.toString()) {
-      return res.json({ msg: "Access is denied." });
+
+    await Order.updateOne({
+      _id: req.params.id
+    },
+    { $set: { "status": req.body.status }}, {upsert: true}, (err, order) => {
+
+      if (err) {
+        return res.status(400).json({
+            error: errorHandler(err)
+        });
     }
+    res.json(order);
 
-    await Order.findByIdAndUpdate(order, req.body, { new: true });
-
-    res.json({ msg: "your order has been successfully updated!" });
+    }).clone()
+    
   })
 );
+
+
+OrderRoute.get("/cart/show_status", verify, asyncHandler(async(req, res) => {
+
+
+res.json(Order.schema.path('status').enumValues)
+
+
+
+}))
+
 
 module.exports = OrderRoute;
