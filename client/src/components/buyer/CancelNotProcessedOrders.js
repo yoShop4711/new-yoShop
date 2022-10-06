@@ -39,6 +39,7 @@ function CanncelNotProcessedOrders() {
               item={item}
               amount={order.amount}
               status={order.status}
+              order={order}
               
             />
           );

@@ -4,12 +4,15 @@ import { GlobalState } from "../../GlobalState"
 import BtnRender from "./BtnRender"
 
 
-function CancelNotProcessedOrder({item, amount}) {
+function CancelNotProcessedOrder({item, amount, order}) {
     const state = useContext(GlobalState)
     const[products] = state.ProductsApi.products
    const[users] = state.UsersApi.users
    const[prods, setProds] = useState([])
    const[merchant, setMerchant] = useState([])
+
+
+   
 
    useEffect(() => {
 
@@ -64,7 +67,7 @@ function CancelNotProcessedOrder({item, amount}) {
     
 
         </div>
-    <BtnRender prods={prods} />
+    <BtnRender order={order} />
     
     
     </div>

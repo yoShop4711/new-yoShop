@@ -12,7 +12,7 @@ function ChangeOrderStatus() {
   const[status, setStatus] = useState("")
   const[enam, setEnam] = useState([])
 
-  
+  console.log(id);
 
 
   useEffect(() => {
