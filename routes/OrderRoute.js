@@ -141,14 +141,12 @@ OrderRoute.put(
   verify,
   asyncHandler(async (req, res) => {
 
-  
-  
-
 
     await Order.updateOne({
       _id: req.params.id
     },
-    { $set: { status: req.body.status }}, {upsert: true}, (err, order) => {
+    { $set: { status: req.body.status }},
+     {upsert: true}, (err, order) => {
 
       if (err) {
         return res.status(400).json({

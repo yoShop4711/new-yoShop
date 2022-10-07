@@ -9,7 +9,9 @@ const AuthRoute =  require('./routes/AuthRoute')
 const ProductRoute = require('./routes/ProductRoute')
 const CategoryRoute = require('./routes/CategoryRoute')
 const OrderRoute = require('./routes/OrderRoute')
+const WishListRoute = require('./routes/WishListRoute')
 const path = require('path')
+
 
 
 
@@ -64,6 +66,7 @@ db.once('open', function(){
   app.use(ProductRoute)
   app.use(CategoryRoute)
   app.use(OrderRoute)
+  app.use(WishListRoute)
   
 
 
