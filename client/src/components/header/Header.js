@@ -83,6 +83,9 @@ function Header() {
         <li>
           <Link to="/orders">Orders Cats</Link>
         </li>
+        <li>
+          <Link to="/customer_wishlists">wishlists</Link>
+        </li>
       </>
     );
   };
@@ -92,6 +95,13 @@ function Header() {
       <>
         <li>
           <Link to="/buyer_orders">my orders</Link>
+        </li>
+        <li>
+          <Link to="/create_wishlist">create wishlist</Link>
+
+        </li>
+        <li>
+          <Link to="/my_wishlist">my wishlist</Link>
         </li>
       </>
     );

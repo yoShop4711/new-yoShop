@@ -33,6 +33,9 @@ import CancelledOrders from "./components/buyer/CancelledOrders"
 import CancelCarts from "./components/buyer/CancelCarts"
 import CanncelNotProcessedOrders from "./components/buyer/CancelNotProcessedOrders"
 import ChangeOrderStatus from "./components/buyer/ChangeOrderStatus"
+import CreateWishlist from "./components/buyer/CreateWishlist"
+import MyWishlists from "./components/buyer/MyWishlists"
+import AllWishlists from "./components/admin/AllWishlists"
 
 
 function App() {
@@ -87,6 +90,9 @@ function App() {
 <Route path="/cancel_carts" element={<CancelCarts />} />
 <Route path="/cancel_not_processed_carts" element={<CanncelNotProcessedOrders />} />
 <Route path="/change_order_status/:id" element={<ChangeOrderStatus />} />
+<Route path="/create_wishlist"  element={<CreateWishlist />} />
+<Route path="/my_wishlist" element={<MyWishlists />} />
+<Route path="/customer_wishlists" element={<AllWishlists />} />
 
   
   </Routes>

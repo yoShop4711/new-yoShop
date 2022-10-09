@@ -19,6 +19,7 @@ module.exports = function(app) {
     
 
   ),
+  
   app.use(
     '/cart',
     createProxyMiddleware({
@@ -26,11 +27,17 @@ module.exports = function(app) {
       changeOrigin: true,
     }),
     
+  ),
+  app.use(
+    '/wish',
+    createProxyMiddleware({
+      target: 'http://localhost:5000',
+      changeOrigin: true,
+    }),
+  
+
 
   )
-
-
-
   
 
 
