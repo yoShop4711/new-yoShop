@@ -1,4 +1,5 @@
 import moment from "moment";
+import WishManageBtn from "./WishManageBtn";
 
 function MyWishlist({wishlist}) {
 
@@ -24,7 +25,7 @@ function MyWishlist({wishlist}) {
 
         </div>
 
-    
+    <WishManageBtn wishlist={wishlist} />
     
     
     
