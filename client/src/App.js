@@ -38,6 +38,7 @@ import MyWishlists from "./components/buyer/MyWishlists"
 import AllWishlists from "./components/admin/AllWishlists"
 import UpdateWishlists from "./components/buyer/UpdateWishlists"
 import DeleteWishlists from "./components/buyer/DeleteWishlists"
+import CustomersOrders from "./components/seller/CustomersOrders"
 
 
 function App() {
@@ -97,6 +98,7 @@ function App() {
 <Route path="/customer_wishlists" element={<AllWishlists />} />
 <Route path="/update_wishlist/:id" element={<UpdateWishlists />} />
 <Route path="/delete_wishlist/:id" element={<DeleteWishlists />} />
+<Route path="/customer_orders" element={<CustomersOrders />} />
 
   
   </Routes>

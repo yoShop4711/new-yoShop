@@ -2,17 +2,20 @@ const OrderRoute = require("express").Router();
 const verify = require("../middleware/verify");
 const authAdmin = require("../middleware/authAdmin");
 const { Order, CartItem } = require("../models/order");
+const Item = require('../models/MerchantOrderModel')
 const { errorHandler } = require("./errorHandler");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
+const sgMail = require("@sendgrid/mail");
+const authSeller = require("../middleware/authSeller");
 
+
+sgMail.setApiKey(process.env.SG_MAIL);
 
 OrderRoute.post(
   "/cart/create_order",
   verify,
   asyncHandler(async (req, res) => {
-    // req.body.order = req.user.id
-
     const { products, amount } = req.body;
     const order = new Order({
       products,
@@ -27,7 +30,22 @@ OrderRoute.post(
       }
     });
 
-    res.json({ msg: "order succesfully created" });
+    const emaiL = await User.find({ _id: req.user.id }).select("email");
+
+    const emailData = {
+      to: emaiL,
+      from: "tristankasusa@outlook.com",
+      subject: `You have placed an order`,
+      html: `
+
+      <p>Total products: ${order.products.length} </p>
+      <p>Total cost: MK ${order.amount} </p>
+      <p>Login to dashboard to the order in detail.</p>
+  `,
+    };
+    sgMail.send(emailData);
+
+    res.json({ msg: "order succesfully created.. please check your email" });
   })
 );
 
@@ -36,7 +54,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const result = await Order.find();
+    const result = await Order.find().sort({ createdAt: -1 })
 
     res.json({ result });
   })
@@ -47,7 +65,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const not_processed = await Order.find({ status: "Not processed" });
+    const not_processed = await Order.find({ status: "Not processed" }).sort({ createdAt: -1 })
 
     res.json({ not_processed });
   })
@@ -58,7 +76,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const processing = await Order.find({ status: "Processing" });
+    const processing = await Order.find({ status: "Processing" }).sort({ createdAt: -1 })
 
     res.json({ processing });
   })
@@ -69,7 +87,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const delivered = await Order.find({ status: "Delivered" });
+    const delivered = await Order.find({ status: "Delivered" }).sort({ createdAt: -1 })
 
     res.json({ delivered });
   })
@@ -80,7 +98,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const cancelled = await Order.find({ status: "Cancelled" });
+    const cancelled = await Order.find({ status: "Cancelled" }).sort({ createdAt: -1 })
 
     res.json({ cancelled });
   })
@@ -140,35 +158,65 @@ OrderRoute.put(
   "/cart/update_status/:id",
   verify,
   asyncHandler(async (req, res) => {
+    await Order.updateOne(
+      {
+        _id: req.params.id,
+      },
+      { $set: { status: req.body.status } },
+      { upsert: true },
+      (err, order) => {
+        if (err) {
+          return res.status(400).json({
+            error: errorHandler(err),
+          });
+        }
+        res.json(order);
+      }
+    ).clone();
+  })
+);
 
+OrderRoute.get(
+  "/cart/show_status",
+  verify,
+  asyncHandler(async (req, res) => {
+    res.json(Order.schema.path("status").enumValues);
+  })
+);
 
-    await Order.updateOne({
-      _id: req.params.id
-    },
-    { $set: { status: req.body.status }},
-     {upsert: true}, (err, order) => {
+OrderRoute.post(
+  "/cart/send_to_merchant/:id",
+  verify,
+  authAdmin,
+  asyncHandler(async (req, res) => {
 
-      if (err) {
-        return res.status(400).json({
-            error: errorHandler(err)
-        });
-    }
-    res.json(order);
+    const item = await Item({
+      orderId: req.params.id
+    })
 
-    }).clone()
-    
+    await item.save(function (error) {
+      if (!error) {
+        Item.find({})
+          .populate("createdBy")
+          .exec(function (error, items) {
+            JSON.stringify(items, null, "\t")
+            
+          });
+      }
+    });
+
+    res.json({msg: 'order has been sent to merchant'})
+
   })
 );
 
 
-OrderRoute.get("/cart/show_status", verify, asyncHandler(async(req, res) => {
+OrderRoute.get('/cart/show_order_to_merchant', verify, authSeller, asyncHandler(async(req, res) => {
 
+  const item = await Item.find().sort({ createdAt: -1 })
 
-res.json(Order.schema.path('status').enumValues)
-
-
+  res.json(item)
 
 }))
-
 
 module.exports = OrderRoute;

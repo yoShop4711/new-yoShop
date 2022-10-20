@@ -61,6 +61,9 @@ function Header() {
         <li>
           <Link to="/my_products">My Products</Link>
         </li>
+        <li>
+          <Link to="/customer_orders">Orders</Link>
+        </li>
       </>
     );
   };
