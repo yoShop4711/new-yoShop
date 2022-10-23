@@ -6,11 +6,11 @@ const Item = require('../models/MerchantOrderModel')
 const { errorHandler } = require("./errorHandler");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
-const sgMail = require("@sendgrid/mail");
+// const sgMail = require("@sendgrid/mail");
 const authSeller = require("../middleware/authSeller");
 
 
-sgMail.setApiKey(process.env.SG_MAIL);
+// sgMail.setApiKey(process.env.SG_MAIL);
 
 OrderRoute.post(
   "/cart/create_order",
@@ -30,21 +30,7 @@ OrderRoute.post(
       }
     });
 
-    const emaiL = await User.find({ _id: req.user.id }).select("email");
-
-    const emailData = {
-      to: emaiL,
-      from: "tristankasusa@outlook.com",
-      subject: `You have placed an order`,
-      html: `
-
-      <p>Total products: ${order.products.length} </p>
-      <p>Total cost: MK ${order.amount} </p>
-      <p>Login to dashboard to the order in detail.</p>
-  `,
-    };
-    sgMail.send(emailData);
-
+    
     res.json({ msg: "order succesfully created.. please check your email" });
   })
 );
@@ -54,7 +40,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const result = await Order.find().sort({ createdAt: -1 })
+    const result = await Order.find()
 
     res.json({ result });
   })
@@ -65,7 +51,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const not_processed = await Order.find({ status: "Not processed" }).sort({ createdAt: -1 })
+    const not_processed = await Order.find({ status: "Not processed" })
 
     res.json({ not_processed });
   })
@@ -76,7 +62,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const processing = await Order.find({ status: "Processing" }).sort({ createdAt: -1 })
+    const processing = await Order.find({ status: "Processing" })
 
     res.json({ processing });
   })
@@ -87,7 +73,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const delivered = await Order.find({ status: "Delivered" }).sort({ createdAt: -1 })
+    const delivered = await Order.find({ status: "Delivered" })
 
     res.json({ delivered });
   })
@@ -98,7 +84,7 @@ OrderRoute.get(
   verify,
   authAdmin,
   asyncHandler(async (req, res) => {
-    const cancelled = await Order.find({ status: "Cancelled" }).sort({ createdAt: -1 })
+    const cancelled = await Order.find({ status: "Cancelled" })
 
     res.json({ cancelled });
   })
@@ -184,10 +170,12 @@ OrderRoute.get(
   })
 );
 
+
 OrderRoute.post(
   "/cart/send_to_merchant/:id",
   verify,
   authAdmin,
+
   asyncHandler(async (req, res) => {
 
     const item = await Item({
@@ -197,7 +185,7 @@ OrderRoute.post(
     await item.save(function (error) {
       if (!error) {
         Item.find({})
-          .populate("createdBy")
+          .populate("orderId")
           .exec(function (error, items) {
             JSON.stringify(items, null, "\t")
             

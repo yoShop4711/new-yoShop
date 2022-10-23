@@ -42,6 +42,7 @@ function NotProcessed() {
               status={notProcess.status}
               user={notProcess.user}
               updated={notProcess.updatedAt}
+              notProcess={notProcess}
             />
           );
         });

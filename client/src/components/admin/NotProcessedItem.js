@@ -1,9 +1,10 @@
 import moment from "moment"
 import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
+import BtnView from "./BtnView"
 
 
-function NotProcessedItem({item, amount, status, user, updated}) {
+function NotProcessedItem({item, amount, status, user, updated, notProcess}) {
     const state = useContext(GlobalState)
     
     const[products] = state.ProductsApi.products
@@ -11,6 +12,9 @@ function NotProcessedItem({item, amount, status, user, updated}) {
     const[prods, setProds] = useState([])
     const[buyer, setBuyer] = useState([])
     const[merchant, setMerchant] = useState([])
+    
+
+  
 
     useEffect(() => {
 
@@ -68,11 +72,11 @@ function NotProcessedItem({item, amount, status, user, updated}) {
 
 
       
-      if(buyer.length === 0) return null;
+      // if(buyer.length === 0) return null;
 
    
-      if(prods.length === 0) 
-      return <h2 style={{textAlign: "center", fontSize: "5rem"}}>No Orders</h2> 
+      // if(prods.length === 0) 
+      // <return h2 style={{textAlign: "center", fontSize: "5rem"}}>No Orders</h2> 
 
 
 
@@ -83,17 +87,18 @@ function NotProcessedItem({item, amount, status, user, updated}) {
 <div className="card">
 <img className="card-img-top" src={`data:image/jpg;base64, ${base64String}`} alt={prods.productName} />
 <div className="card-body">
-<h2 className="card-title text-danger">Seller's name: <em> {merchant.fullname} </em></h2>
-  <h2 className="card-title">Buyer's name: <em> {buyer.fullname} </em></h2>
-  <h2>Product's name: <em> {prods.productName} </em> </h2>
-  <h5 className="card-title">product price: <em>MK{amount}</em></h5>
-  <h5 className="card-title">product status: <em> {status} </em></h5>
-  <h5 className="card-title">number of products: <em>{item.count}</em> </h5>
+<p className="card-title text-danger">seller: <em> {merchant.fullname} </em></p>
+  <h2 className="card-title">buyer: <em> {buyer.fullname} </em></h2>
+  <p>product: <em> {prods.productName} </em> </p>
+  <p className="card-title">product: <em>MK{amount}</em></p>
+  <p className="card-title">product: <em> {status} </em></p>
+  <p className="card-title">quantity: <em>{item.count}</em> </p>
 
 </div>
 <div className="card-footer">
   <small className="text-muted">Last updated {moment(updated).fromNow()}</small>
 </div>
+<BtnView notProcess={notProcess} />
 </div>
 
 </div>
