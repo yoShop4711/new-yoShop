@@ -38,7 +38,6 @@ OrderRoute.post(
 OrderRoute.get(
   "/cart/show_carts",
   verify,
-  authAdmin,
   asyncHandler(async (req, res) => {
     const result = await Order.find()
 

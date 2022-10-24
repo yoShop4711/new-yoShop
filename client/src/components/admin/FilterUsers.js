@@ -25,7 +25,7 @@ function FilterUsers() {
                 })
     
                 setUsers(res.data.users); 
-                // console.log(res.data.users);         
+                        
                        }
         }
     

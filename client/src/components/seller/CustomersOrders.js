@@ -9,6 +9,9 @@ function CustomersOrders() {
    const [products] = state.ProductsApi.products
    const [users] = state.UsersApi.users
    const [items, setItems] = useState([])
+   const[resultOrders, setResultOrders] = useState([])
+   const [merchantOrders, setMerchantOrders] = useState([])
+   
 
    useEffect(() => {
     const getOrders  = async() => {
@@ -28,8 +31,45 @@ function CustomersOrders() {
 
    }, [token])
 
+
+   useEffect(() => {
+
+    const allOrders = async() => {
+
+        const res = await axios.get('/cart/show_carts', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        setResultOrders(res.data.result);
+
+    }
+
+    allOrders()
+
+
+   }, [token])
+
+
    
-console.log(items);
+
+   
+//   useEffect(() => {
+
+//     if(orderID) {
+//         resultOrders.forEach(res => {
+//             if(res._id === orderID) setMerchantOrders(res)
+//         })
+
+//     }
+
+//   }, [orderID, resultOrders])
+
+  
+// console.log(merchantOrders);
+   
+
 
 
     return(<div>
