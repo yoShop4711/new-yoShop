@@ -1,13 +1,15 @@
 import axios from "axios"
 import { useContext, useState, useEffect } from "react"
 import { GlobalState } from "../../GlobalState"
+import CustomerOrder from "./CustomerOrder"
 
 function CustomerOrders({item}) {
       
       const state =  useContext(GlobalState)
       const [token] = state.token
       const[resultOrders, setResultOrders] = useState([])
-      const [merchantOrders, setMerchantOrders] = useState([])
+      const[merchantOrders, setMerchantOrders] = useState({})
+
 
 
 
@@ -42,16 +44,15 @@ function CustomerOrders({item}) {
 
   }, [item.orderId, resultOrders])
 
-
-    console.log(merchantOrders);
     
+  
 
     return(<div>
 
-        <h1>kill jay z</h1>
+    
+                <CustomerOrder merchantOrders={merchantOrders} />
 
-
-
+        
     </div>)
 }
 

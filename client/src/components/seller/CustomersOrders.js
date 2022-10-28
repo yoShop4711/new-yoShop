@@ -28,7 +28,6 @@ function CustomersOrders() {
     getOrders()
 
    }, [token])
-
    
 
     return(<div>
