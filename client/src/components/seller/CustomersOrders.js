@@ -7,37 +7,40 @@ function CustomersOrders() {
 
    const state = useContext(GlobalState)
    const [token] = state.token
-   const [items, setItems] = useState([])
+   const[products, setProducts] = useState([])
     
-   
-
+    
    useEffect(() => {
-    const getOrders  = async() => {
+    const sellerProds = async() => {
 
-        const res = await axios.get('/cart/show_order_to_merchant', {
+        const res = await axios.get('/api/seller_products', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
 
-        setItems(res.data);
+        setProducts(res.data.products);
 
 
     }
+    sellerProds()
 
-    getOrders()
+}, [token])
 
-   }, [token])
+
+
+
+      
    
+
 
     return(<div>
         {
-         items.map((item, index) => {
-            return <CustomerOrders key={index} item={item} />
-
-         })   
+            products.map((product, index) => {
+                return <CustomerOrders key={index} product={product} />
+            })
         }
-    
+       
     </div>)
 }
 

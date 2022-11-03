@@ -3,14 +3,15 @@ import { useContext, useState, useEffect } from "react"
 import { GlobalState } from "../../GlobalState"
 import CustomerOrder from "./CustomerOrder"
 
-function CustomerOrders({item}) {
+function CustomerOrders({product}) {
       
       const state =  useContext(GlobalState)
       const [token] = state.token
       const[resultOrders, setResultOrders] = useState([])
-      const[merchantOrders, setMerchantOrders] = useState({})
 
+      
 
+      
 
 
       useEffect(() => {
@@ -32,26 +33,17 @@ function CustomerOrders({item}) {
     
        }, [token])
 
-
-         useEffect(() => {
-
-    if(item.orderId) {
-        resultOrders.forEach(res => {
-            if(res._id === item.orderId) setMerchantOrders(res)
-        })
-
-    }
-
-  }, [item.orderId, resultOrders])
-
     
-  
+      
+      
 
     return(<div>
 
-    
-                <CustomerOrder merchantOrders={merchantOrders} />
 
+        <CustomerOrder product={product} resultOrders={resultOrders} />
+
+    
+               
         
     </div>)
 }
