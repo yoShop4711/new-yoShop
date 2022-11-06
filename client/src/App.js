@@ -40,6 +40,7 @@ import UpdateWishlists from "./components/buyer/UpdateWishlists"
 import DeleteWishlists from "./components/buyer/DeleteWishlists"
 import CustomersOrders from "./components/seller/CustomersOrders"
 import ToMerchant from "./components/admin/ToMerchant"
+import BuyerProfile from "./components/seller/BuyerProfile"
 
 
 function App() {
@@ -101,6 +102,7 @@ function App() {
 <Route path="/delete_wishlist/:id" element={<DeleteWishlists />} />
 <Route path="/customer_orders" element={<CustomersOrders />} />
 <Route path="/to_merchant/:id" element={<ToMerchant />} />
+<Route path="/buyer_profile/:id" element={<BuyerProfile />}  />
 
   
   </Routes>

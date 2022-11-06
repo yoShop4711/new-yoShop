@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
+import FullOrders from "./FullOrders";
+import "./products.css"
 
-function MerchantOrder({merchantOrders, product}) {
 
+function MerchantOrder({items}) {
     
-
-    const[owner, setOwner] = useState([])
-
     
+    const[prods, setProds] = useState([])
 
     useEffect(() => {
-        if(product._id) {
-            merchantOrders.products.forEach((order) => {
-                if(order._id === product._id) setOwner(order)
+        items.products?.map(element => {
+          return  setProds(element)
+        });
+         
 
-            })
-        }
-
-    }, [owner,  merchantOrders.products, product._id])
-
-    console.log(owner)
-
-    return(<div>
+    }, [items.products])
+    
 
 
+ 
+     return(<div className="products">
+
+<FullOrders prods={prods} items={items} />
 
     </div>)
 }
