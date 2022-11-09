@@ -10,6 +10,7 @@ const ProductRoute = require('./routes/ProductRoute')
 const CategoryRoute = require('./routes/CategoryRoute')
 const OrderRoute = require('./routes/OrderRoute')
 const WishListRoute = require('./routes/WishListRoute')
+const MessageRoute = require('./routes/MessageRoute')
 const path = require('path')
 
 
@@ -46,7 +47,7 @@ db.once('open', function(){
 
 
 
-  // const io = require("socket.io")(3300)
+  const io = require("socket.io")(3300)
 
   // app.use(cors())
   app.use("/public", express.static(path.join(__dirname, '/public')));
@@ -56,10 +57,10 @@ db.once('open', function(){
   app.use(cookieParser())
 
 
-  // app.use(function (req, res, next) {
-  //   req.io = io;
-  //   next();
-  // });
+  app.use(function (req, res, next) {
+    req.io = io;
+    next();
+  });
   
 
   app.use(AuthRoute)
@@ -67,7 +68,7 @@ db.once('open', function(){
   app.use(CategoryRoute)
   app.use(OrderRoute)
   app.use(WishListRoute)
-  
+  app.use(MessageRoute)
 
 
   if(process.env.NODE_ENV === 'production'){

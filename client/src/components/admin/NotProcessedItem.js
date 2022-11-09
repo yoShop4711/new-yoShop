@@ -1,7 +1,7 @@
 import moment from "moment"
 import { useContext, useEffect, useState } from "react"
 import { GlobalState } from "../../GlobalState"
-import BtnView from "./BtnView"
+
 
 
 function NotProcessedItem({item, amount, status, user, updated, notProcess}) {
@@ -98,7 +98,7 @@ function NotProcessedItem({item, amount, status, user, updated, notProcess}) {
 <div className="card-footer">
   <small className="text-muted">Last updated {moment(updated).fromNow()}</small>
 </div>
-<BtnView notProcess={notProcess} />
+
 </div>
 
 </div>
