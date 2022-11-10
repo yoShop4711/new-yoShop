@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { GlobalState } from "../../GlobalState"
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { Card, ListGroup } from "react-bootstrap"
 
 
@@ -78,6 +78,7 @@ function BuyerProfile() {
             <ListGroup.Item><span style={{color: "red"}}>username: </span>{single.username}</ListGroup.Item>
             <ListGroup.Item> <span style={{color: "blue"}}>Email: </span> {single.email}</ListGroup.Item>
             <ListGroup.Item> <span style={{color: "green"}}>Location: </span> {single.location}</ListGroup.Item>
+            <ListGroup.Item> <Link to={`/message_buyer/${single._id}`}>message buyer</Link> </ListGroup.Item>
             
             </ListGroup>
             

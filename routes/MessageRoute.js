@@ -111,13 +111,6 @@ MessageRoute.get(
                 res.send(messages);
             }
         });
-
-
-
-
-
-
-
   })
 );
 
