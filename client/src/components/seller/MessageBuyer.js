@@ -1,4 +1,7 @@
-import { useRef } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { GlobalState } from "../../GlobalState"
+import { useParams } from "react-router-dom"
+import axios from "axios"
 
 import {
   Grid,
@@ -14,7 +17,8 @@ import {
   makeStyles,
   Button
 } from "@material-ui/core";
-// import { SendRounded  } from "@material-ui/icons/SendRounded";
+
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,10 +84,43 @@ const useStyles = makeStyles((theme) => ({
 
 
 function MessageBuyer() {
+   const {id} = useParams()
 
     const classes = useStyles();
     let chatBottom = useRef(null);
 
+    const state = useContext(GlobalState)
+    const [token] = state.token
+    const[users] = state.UsersApi.users
+
+  
+
+    const [messages, setMessages] = useState([])
+    const[peoples, setPeoples] = useState([])
+
+     useEffect(() => {
+
+      const getMessages = async () => {
+
+        const res = await axios.get(`/message/coversation/query?userId=${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+
+          }
+        })
+
+        setMessages(res.data);
+
+
+      }
+
+      getMessages()
+
+     }, [id, token])
+
+     
+
+     
 
   return (
     <Grid container className={classes.root}>
