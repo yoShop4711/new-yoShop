@@ -10,11 +10,11 @@ function MessageBuyer() {
    
 
 
-const { id } = useParams()     
+let { id } = useParams()     
 
   return (<div>
     
-        return <Messages  id={id} />
+         <Messages  id={id} />
       
     
 
@@ -23,3 +23,14 @@ const { id } = useParams()
 }
 
 export default MessageBuyer;
+
+
+
+
+
+
+
+
+
+
+

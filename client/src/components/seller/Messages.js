@@ -96,6 +96,8 @@ function Messages({id}) {
     
     const [token] = state.token
     const [messages, setMessages] = useState([])
+    const [body, setNewMessage] = useState("");
+
     
      useEffect(() => {
 
@@ -117,7 +119,37 @@ function Messages({id}) {
 
      }, [id, token])
 
+
+
+     const handleChange = (event) => {
+      
+
+      setNewMessage(event.target.value)
+
+
+     }
+
+     let to = id
+
+    
+
      
+     const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      const res = await axios.post('/message/send', {to, body}, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+
+      console.log(res);
+
+
+     
+     } 
+
 
 
 
@@ -175,7 +207,7 @@ function Messages({id}) {
             <div ref={chatBottom} />
           </Grid>
           <Grid item xs={12} className={classes.inputRow}>
-            <form  className={classes.form}>
+            <form onSubmit={ handleSubmit }  className={classes.form}>
               <Grid
                 container
                 className={classes.newMessageRow}
@@ -188,6 +220,8 @@ function Messages({id}) {
                     variant="outlined"
                     margin="dense"
                     fullWidth
+                    value={body}
+                    onChange={ handleChange || "" }
                     
                   />
                 </Grid>
@@ -208,3 +242,4 @@ function Messages({id}) {
 }
 
 export default Messages
+
